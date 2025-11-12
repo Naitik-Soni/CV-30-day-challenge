@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# local files
+To be considered.txt
+
 # C extensions
 *.so
 

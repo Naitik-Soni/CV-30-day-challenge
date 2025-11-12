@@ -1,0 +1,3 @@
+ - Would you like to practice these concepts tomorrow (Day 2) with a real-world mini project —
+👉 “Edge Detection & Color Segmentation using OpenCV filters and HSV mask”
+
