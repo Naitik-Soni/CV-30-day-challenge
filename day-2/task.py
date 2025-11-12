@@ -1,3 +1,19 @@
+"""
+Write a Python script that:
+-> Loads an image (image_path same as yesterday’s or a new one).
+-> Converts it to grayscale.
+-> Applies and saves results for:
+    - Binary thresholding
+    - Adaptive Gaussian thresholding
+    - Otsu’s thresholding
+-> Applies and saves results for:
+    - Normal blur
+    - Gaussian blur
+    - Median blur
+    - Bilateral filter
+-> Shows all results using cv2.imshow() (or matplotlib if preferred).
+"""
+
 import cv2
 
 output_dir = "outputs"
