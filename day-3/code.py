@@ -5,8 +5,8 @@ import os
 # --- Config ---
 img_path = r"P:\Computer vision Experiments\30-Days challenge\CV-30-day-challenge\Images\deer.jpg"
 resize_factor = 0.6
-kernel_size = (5, 5)
-kernel_shape = cv2.MORPH_CROSS   # try: MORPH_ELLIPSE, MORPH_CROSS
+kernel_size = (21, 21)
+kernel_shape = cv2.MORPH_RECT   # try: MORPH_ELLIPSE, MORPH_CROSS
 iterations = 1
 out_dir = r".\outputs"
 os.makedirs(out_dir, exist_ok=True)
@@ -38,6 +38,7 @@ closed = cv2.morphologyEx(img, cv2.MORPH_CLOSE, kernel, iterations=iterations)
 gradient = cv2.morphologyEx(img, cv2.MORPH_GRADIENT, kernel)   # edges
 tophat = cv2.morphologyEx(img, cv2.MORPH_TOPHAT, kernel)       # small bright spots
 blackhat = cv2.morphologyEx(img, cv2.MORPH_BLACKHAT, kernel)   # small dark spots
+hitmiss = cv2.morphologyEx(img, cv2.MORPH_HITMISS, kernel)
 
 # --- Save outputs ---
 cv2.imwrite(os.path.join(out_dir, "original.png"), img)
@@ -48,6 +49,7 @@ cv2.imwrite(os.path.join(out_dir, "closed.png"), closed)
 cv2.imwrite(os.path.join(out_dir, "gradient.png"), gradient)
 cv2.imwrite(os.path.join(out_dir, "tophat.png"), tophat)
 cv2.imwrite(os.path.join(out_dir, "blackhat.png"), blackhat)
+cv2.imwrite(os.path.join(out_dir, "hitmiss.png"), hitmiss)
 
 # --- Display: make a combined comparison image ---
 def stack_images(img_list, cols=3, scale=1.0):
@@ -68,8 +70,8 @@ def stack_images(img_list, cols=3, scale=1.0):
 
 labels = ["Original", "Dilation", "Erosion",
           "Opened", "Closed", "Gradient",
-          "Top-hat", "Black-hat"]
-images = [img, dilation, erosion, opened, closed, gradient, tophat, blackhat]
+          "Top-hat", "Black-hat", "Hitmiss"]
+images = [img, dilation, erosion, opened, closed, gradient, tophat, blackhat, hitmiss]
 grid = stack_images(images, cols=3)
 
 # overlay labels (small)
