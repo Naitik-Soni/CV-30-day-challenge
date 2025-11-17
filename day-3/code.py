@@ -3,9 +3,9 @@ import numpy as np
 import os
 
 # --- Config ---
-img_path = r"P:\Computer vision Experiments\30-Days challenge\CV-30-day-challenge\Images\deer.jpg"
-resize_factor = 0.6
-kernel_size = (21, 21)
+img_path = r"P:\Computer vision Experiments\30-Days challenge\CV-30-day-challenge\Images\Autumn.jpg"
+resize_factor = 0.3
+kernel_size = (5, 5)
 kernel_shape = cv2.MORPH_RECT   # try: MORPH_ELLIPSE, MORPH_CROSS
 iterations = 1
 out_dir = r".\outputs"
