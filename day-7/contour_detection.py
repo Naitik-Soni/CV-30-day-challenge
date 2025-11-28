@@ -1,6 +1,6 @@
 import cv2
 
-img = cv2.imread(r"..\Images\rings.webp")
+img = cv2.imread(r"..\Images\elephant.jpg")
 
 h, w = img.shape[:2]
 resize_factor = 1
@@ -16,7 +16,7 @@ contours, _ = cv2.findContours(thresh, cv2.RETR_LIST, cv2.CHAIN_APPROX_SIMPLE)
 
 print("Length of contours:", len(contours))
 
-cv2.drawContours(img, contours, -1, (127, 180, 255), 3)
+cv2.drawContours(img, contours, -1, (0, 180, 150), 3)
 for cnt in contours:
 
     peri = cv2.arcLength(cnt, True)

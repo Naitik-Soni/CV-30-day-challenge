@@ -1,0 +1,9 @@
+1. Brightness, Contrast & Histogram Fixer
+- Concepts: Image basics, histogram, stretching, equalization
+
+# Task:
+- Load image
+- Implement manual brightness (+/-) and contrast scaling
+- Perform histogram stretching
+- Compare cv2.equalizeHist vs cv2.createCLAHE on the same images
+- Plot histograms before/after
