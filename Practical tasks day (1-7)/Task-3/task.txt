@@ -1,0 +1,5 @@
+-> Concepts: Simple thresholding, Otsu, adaptive
+-> Task:
+ - Show original + thresholded output side-by-side
+ - Plot histogram and highlight chosen threshold
+ - Compare results in varying lighting
