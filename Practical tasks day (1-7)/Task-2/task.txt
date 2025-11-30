@@ -1,0 +1,6 @@
+-> Concepts: Averaging, Gaussian, Median, Bilateral
+-> Task:
+ - Make a “filter dashboard”:
+ - Press keys 1–4 to switch filters
+ - Adjust kernel size dynamically
+ - Compare smoothing effects on noisy images
