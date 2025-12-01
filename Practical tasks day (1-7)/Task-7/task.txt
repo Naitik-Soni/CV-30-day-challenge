@@ -1,0 +1,9 @@
+-> Automatic Number Plate Localizer (No OCR)
+-> Concepts:
+ - Morphological gradients
+ - Thresholding
+ - Contour filtering
+ - Aspect ratio + area checks
+-> Task:
+ - From a car image, detect only the license plate region
+ - No OCR needed—just localize
