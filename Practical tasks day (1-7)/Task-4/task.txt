@@ -1,0 +1,7 @@
+-> Document Scanner (Like CamScanner Mini)
+-> Concepts: Edge detection, contour detection, perspective transform
+-> Task:
+ - Detect document boundary
+ - Apply edge → contour area filtering → polygon approx
+ - Warp the document to top-down view
+ - Apply adaptive thresholding to clean it
