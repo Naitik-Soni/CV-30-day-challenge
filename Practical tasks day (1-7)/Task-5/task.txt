@@ -1,0 +1,7 @@
+-> Coin Counter / Object Size Detector
+-> Concepts: Hough circles, thresholding, contour area, morphology
+-> Task:
+ - Detect coins
+ - Remove background with thresholding
+ - Use Hough Circles OR contour filtering
+ - Count coins + measure their relative sizes

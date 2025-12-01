@@ -1,9 +1,9 @@
 import cv2
 
-img_path = 'Image-3.jpg'
+img_path = 'Image-1.jpg'
 img = cv2.imread(img_path)
 
-resize_factor = 1
+resize_factor = 0.2
 new_dimensions = (int(img.shape[1] * resize_factor), int(img.shape[0] * resize_factor))
 img = cv2.resize(img, new_dimensions)
 
