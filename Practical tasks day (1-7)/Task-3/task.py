@@ -15,11 +15,11 @@ adaptive = cv2.adaptiveThreshold(clahe, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2
 _, otsu = cv2.threshold(clahe, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU)
 
 
-cv2.imshow("Original", image)
-cv2.imshow("Hist eq", histequ)
-cv2.imshow("CLAHE", clahe)
-cv2.imshow("Normal thresh", thresh)
-cv2.imshow("Adaptive", adaptive)
-cv2.imshow("Otsu", otsu)
+cv2.imshow(r"Original", image)
+cv2.imwrite(r".\Outputs\Hist eq.png", histequ)
+cv2.imwrite(r".\Outputs\CLAHE.png", clahe)
+cv2.imwrite(r".\Outputs\Normal thresh.png", thresh)
+cv2.imwrite(r".\Outputs\Adaptive.png", adaptive)
+cv2.imwrite(r".\Outputs\Otsu.png", otsu)
 cv2.waitKey(0)
 cv2.destroyAllWindows()
