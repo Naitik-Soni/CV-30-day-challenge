@@ -1,0 +1,6 @@
+-> Lane Line Detection (Basic Autonomous Driving)
+-> Concepts: Canny, Hough lines
+-> Task:
+ - Detect lane lines using Canny
+ - Apply mask
+ - Use Hough Lines to draw the two main lanes
