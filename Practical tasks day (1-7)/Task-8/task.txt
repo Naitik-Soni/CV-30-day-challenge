@@ -1,0 +1,9 @@
+-> Real-Time Object Tracker (Color + Shape)
+-> Concepts:
+ - Color thresholding in HSV
+ - Morphology
+ - Contour filtering
+ - Centroid tracking
+-> Task:
+ - Track a colored ball or object
+ - Draw path of movement

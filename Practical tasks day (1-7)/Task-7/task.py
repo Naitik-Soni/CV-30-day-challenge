@@ -1,6 +1,6 @@
 import cv2
 
-image_path = "car-1.jpg"
+image_path = "car.webp"
 image = cv2.imread(image_path)
 
 resize_factor = 0.8
@@ -30,7 +30,7 @@ for cnt in contours:
 
     # if len(approx) == 4:
     if len(approx) == 4 and area >= image_area / 30:
-        print(area, resized_image.shape[0]*resized_image.shape[1])
+        # print(area, resized_image.shape[0]*resized_image.shape[1])
         number_plate = resized_image[y:y + h, x:x + w]
         cv2.rectangle(resized_image, (x, y), (x + w, y + h), (255, 0, 0), 2)
         cv2.putText(resized_image, "Object", (x, y - 10),
