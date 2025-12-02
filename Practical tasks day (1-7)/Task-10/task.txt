@@ -1,0 +1,9 @@
+-> Suduko Digit Extractor (Without ML)
+-> Concepts:
+ - Edge detection
+ - Largest contour (square) detection
+ - Grid segmentation
+ - Adaptive thresholding
+-> Task:
+ - Extract 9×9 Sudoku grid
+ - Return 81 cell images
