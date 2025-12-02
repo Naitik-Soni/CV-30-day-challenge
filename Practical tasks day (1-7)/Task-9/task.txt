@@ -1,0 +1,8 @@
+-> Fire/Smoke Detection (Rule-Based)
+-> Concepts:
+ - Color thresholding
+ - Morphological ops
+ - Contour area filtering
+-> Task:
+ - Detect fire regions using HSV ranges
+ - Filter false positives using shape + area
