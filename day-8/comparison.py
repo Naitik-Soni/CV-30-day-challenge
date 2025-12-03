@@ -79,7 +79,7 @@ def compare_harris_shitomasi_video(input_path, output_path, show_preview=False):
 
 if __name__ == "__main__":
     # Change these paths as needed
-    input_video  = "input.mp4"                     # your video file
-    output_video = "harris_vs_shitomasi.mp4"       # output comparison video
+    input_video  = "..\Images\Soccer.mp4"                     # your video file
+    output_video = "harris_vs_shitomasi_soccer.mp4"       # output comparison video
 
     compare_harris_shitomasi_video(input_video, output_video, show_preview=False)
