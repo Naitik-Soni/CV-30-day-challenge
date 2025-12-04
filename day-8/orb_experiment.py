@@ -1,4 +1,5 @@
 import cv2
+import numpy as np
 
 img = cv2.imread(r"..\Images\balcony garden.jpg", 0)
 
@@ -11,6 +12,12 @@ orb = cv2.ORB_create()
 
 # Detect keypoints and descriptors
 keypoints, descriptors = orb.detectAndCompute(img, None)
+
+print(f"Number of keypoints detected: {len(keypoints)}")
+print(f"Descriptor shape: {descriptors.shape}")
+
+print(keypoints[0].pt)  # Print coordinates of the first keypoint
+print(descriptors[0])    # Print descriptor of the first keypoint
 
 # Draw keypoints
 out = cv2.drawKeypoints(img, keypoints, None, color=(0,255,0))
