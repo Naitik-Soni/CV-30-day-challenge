@@ -44,16 +44,17 @@ def create_mask(image_height, image_width, block_width=32):
     mask = np.zeros((image_height, image_width), dtype=np.uint8)
     
     # Iterate through each row of the mask
-    for i in range(image_height):
-        # Check if the row index 'i' is even or odd
-        if (i // block_width) % 2 == 0:
-            # For 'even' rows (or blocks of rows): White on the left half
-            midpoint = image_width // 2
-            mask[i, 0:midpoint] = 255
-        else:
-            # For 'odd' rows (or blocks of rows): White on the right half
-            midpoint = image_width // 2
-            mask[i, midpoint:image_width] = 255
+    # for i in range(image_height):
+    #     # Check if the row index 'i' is even or odd
+    #     if (i // block_width) % 2 == 0:
+    #         # For 'even' rows (or blocks of rows): White on the left half
+    #         midpoint = image_width // 2
+    #         mask[i, 0:midpoint] = 255
+    #     else:
+    #         # For 'odd' rows (or blocks of rows): White on the right half
+    #         midpoint = image_width // 2
+    #         mask[i, midpoint:image_width] = 255
+    mask[:,:] = 255
             
     return mask
 
@@ -78,7 +79,7 @@ def blend_pyramids(lpA, lpB, gpA, gpB, gpM):
         # Blending formula: L_S = G_M * L_A + (1 - G_M) * L_B
         ls = np.add(np.multiply(la, gm_3channel), np.multiply(lb, 1.0 - gm_3channel))
         LS.append(ls)
-        
+
     # 2. Blend the Coarsest (Top) Gaussian level (the low-frequency base)
     top_A = gpA[-1]
     top_B = gpB[-1]
@@ -122,8 +123,8 @@ if __name__ == '__main__':
     # The mask file 'mask.png' is not required as it will be generated dynamically.
     # 
     # Example:
-    imgB = cv2.imread(r'../Images/deer.jpg')
-    imgA = cv2.imread(r'../Images/full moon.jpg')
+    imgA = cv2.imread(r'../Images/Face-1.jpg')
+    imgB = cv2.imread(r'../Images/Face-2.jpg')
     # --------------------------------------------------------------------------------------------------
     
     # Placeholder Image A (e.g., Green/Yellow, Size 500x400)
@@ -149,9 +150,9 @@ if __name__ == '__main__':
     N_LEVELS = 5
 
     # Create the binary mask using the target dimensions
-    # binary_mask = create_mask(H_target, W_target)
-    binary_mask = cv2.imread(r"../Images/mask.jpg", 0)
-    binary_mask = cv2.resize(binary_mask, (W_target, H_target), interpolation=cv2.INTER_LINEAR)
+    binary_mask = create_mask(H_target, W_target)
+    # binary_mask = cv2.imread(r"../Images/mask.jpg", 0)
+    # binary_mask = cv2.resize(binary_mask, (W_target, H_target), interpolation=cv2.INTER_LINEAR)
     
     # Build the required pyramids
     gpA, lpA = build_pyramid(imgA_resized, N_LEVELS)
