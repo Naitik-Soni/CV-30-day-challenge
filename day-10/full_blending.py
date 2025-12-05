@@ -39,13 +39,22 @@ def build_gaussian_mask_pyramid(mask, levels=5):
         
     return gpM
 
-def create_mask(image_height, image_width):
+def create_mask(image_height, image_width, block_width=32):
     """Creates a binary mask (H x W) for a corner split (Top-Left White)."""
     mask = np.zeros((image_height, image_width), dtype=np.uint8)
-    h_mid = image_height // 2
-    w_mid = image_width // 2
-    # White (255) in the top-left quarter
-    mask[0:h_mid, 0:w_mid] = 255
+    
+    # Iterate through each row of the mask
+    for i in range(image_height):
+        # Check if the row index 'i' is even or odd
+        if (i // block_width) % 2 == 0:
+            # For 'even' rows (or blocks of rows): White on the left half
+            midpoint = image_width // 2
+            mask[i, 0:midpoint] = 255
+        else:
+            # For 'odd' rows (or blocks of rows): White on the right half
+            midpoint = image_width // 2
+            mask[i, midpoint:image_width] = 255
+            
     return mask
 
 def blend_pyramids(lpA, lpB, gpA, gpB, gpM):
@@ -113,8 +122,8 @@ if __name__ == '__main__':
     # The mask file 'mask.png' is not required as it will be generated dynamically.
     # 
     # Example:
-    imgA = cv2.imread(r'../Images/deer.jpg')
-    imgB = cv2.imread(r'../Images/Autumn.jpg')
+    imgB = cv2.imread(r'../Images/deer.jpg')
+    imgA = cv2.imread(r'../Images/full moon.jpg')
     # --------------------------------------------------------------------------------------------------
     
     # Placeholder Image A (e.g., Green/Yellow, Size 500x400)
@@ -140,7 +149,9 @@ if __name__ == '__main__':
     N_LEVELS = 5
 
     # Create the binary mask using the target dimensions
-    binary_mask = create_mask(H_target, W_target)
+    # binary_mask = create_mask(H_target, W_target)
+    binary_mask = cv2.imread(r"../Images/mask.jpg", 0)
+    binary_mask = cv2.resize(binary_mask, (W_target, H_target), interpolation=cv2.INTER_LINEAR)
     
     # Build the required pyramids
     gpA, lpA = build_pyramid(imgA_resized, N_LEVELS)
