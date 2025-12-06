@@ -123,8 +123,8 @@ if __name__ == '__main__':
     # The mask file 'mask.png' is not required as it will be generated dynamically.
     # 
     # Example:
-    imgA = cv2.imread(r'../Images/Face-1.jpg')
-    imgB = cv2.imread(r'../Images/Face-2.jpg')
+    imgB = cv2.imread(r'../Images/Face.jpg')
+    imgA = cv2.imread(r'../Images/city.jpg')
     # --------------------------------------------------------------------------------------------------
     
     # Placeholder Image A (e.g., Green/Yellow, Size 500x400)
