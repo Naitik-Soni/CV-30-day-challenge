@@ -2,46 +2,67 @@ import cv2
 import numpy as np
 
 def load_resize_images():
-    image1 = cv2.imread(r"../Images/Face.jpg")
-    image2 = cv2.imread(r"../Images/city.jpg")
+    face = cv2.imread(r"../Images/Face.jpg")
+    city = cv2.imread(r"../Images/city.jpg")
 
-    image1 = cv2.resize(image1, (600, 600), cv2.INTER_AREA)
-    image2 = cv2.resize(image2, (600, 600), cv2.INTER_AREA)
+    face = cv2.resize(face, (600, 600), cv2.INTER_AREA)
+    city = cv2.resize(city, (600, 600), cv2.INTER_AREA)
+    return face, city
 
-    return image1, image2
+def get_face_mask(face_img):
+    gray = cv2.cvtColor(face_img, cv2.COLOR_BGR2GRAY)
 
-def return_gray_images(images):
-    gray1 = cv2.cvtColor(images[0], cv2.COLOR_BGR2GRAY)
-    gray2 = cv2.cvtColor(images[1], cv2.COLOR_BGR2GRAY)
+    kernel = cv2.getStructuringElement(cv2.MORPH_ELLIPSE, (5,5))
 
-    return gray1, gray2
+    # Detect face region: white bg threshold
+    _, mask = cv2.threshold(gray, 240, 255, cv2.THRESH_BINARY_INV)
 
-def simple_blend(images, grays):
-    alpha = 0.5
-    # image1[gray1>250] = [0,255,0]
-    blended_image = cv2.addWeighted(images[0], alpha, images[1], 1-alpha, 0)
-    selected_blended_pixels = blended_image[grays[0] < 251]
-    images[0][grays[0] < 251] = selected_blended_pixels
+    # Smooth edge so blending looks soft
+    mask = cv2.GaussianBlur(mask, (15, 15), 0)
+    mask = cv2.dilate(mask, kernel, iterations=5)
+    mask = cv2.erode(mask, kernel, iterations=5)
 
-    return images
+    mask_f = mask.astype(np.float32) / 255.0
+    return mask, mask_f
 
-def blur_image(image):
-    return cv2.GaussianBlur(image, (5,5), 0)
+def alpha_blend_face_only(face, city, mask_f, alpha=0.7):
+    """
+    α applies to only face areas.
+    outside mask -> pure city
+    inside mask -> blended city + face
+    """
+
+    # expand for 3 channels
+    mask_f = mask_f[:, :, None]
+
+    # blending inside face area only
+    blended = city * (1 - mask_f) + (face * alpha + city * (1 - alpha)) * mask_f
+
+    return blended.astype(np.uint8)
+
+def perform_or_operation(result, mask):
+    new_mask = cv2.bitwise_not(mask)
+    merged_mask = cv2.merge((new_mask, new_mask, new_mask))
+
+    return cv2.bitwise_or(result, merged_mask)
 
 def main():
-    image1, image2 = load_resize_images()
-    gray1, gray2 = return_gray_images((image1, image2))
+    face, city = load_resize_images()
 
-    blurred = blur_image(gray1)
-    image1, image2 = simple_blend((image1, image2), (blurred, gray2))
+    mask, mask_f = get_face_mask(face)
 
+    result = alpha_blend_face_only(face, city, mask_f, alpha=0.7)
 
-    cv2.imshow("Image 1", image1)
-    cv2.imshow("Image 2", image2)
-    cv2.imshow("Gray 1", gray1)
-    cv2.imshow("Blurred", blurred)
+    final_result = perform_or_operation(result, mask)
+
+    cv2.imshow("Face", face)
+    cv2.imshow("City", city)
+    cv2.imshow("Mask (face region)", mask)
+    cv2.imshow("Blended Result (Only Face)", result)
+    cv2.imshow("Final blended result", final_result)
 
     cv2.waitKey(0)
     cv2.destroyAllWindows()
 
-main()
+if __name__ == "__main__":
+    main()
