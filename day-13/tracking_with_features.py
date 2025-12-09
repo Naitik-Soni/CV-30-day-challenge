@@ -1,13 +1,19 @@
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(r"../Images/car_race.mp4")
+cap = cv2.VideoCapture(r"C:\Users\baps\Documents\Naitik Soni\ComputerVision\CV-30-day-challenge\Practical tasks day (1-7)\Task-8\circle.mp4")
+
+def resize_frame(frame):
+    resize_factor = 0.4
+    h, w = frame.shape[:2]
+    return cv2.resize(frame, (int(w*resize_factor), int(resize_factor*h)), cv2.INTER_AREA)
 
 ret, old_frame = cap.read()
+old_frame = resize_frame(old_frame)
 old_gray = cv2.cvtColor(old_frame, cv2.COLOR_BGR2GRAY)
 
 # Select ROI
-x,y,w,h = cv2.selectROI("Frame", old_frame, False)
+x,y,w,h = cv2.selectROI("Frame", old_frame)
 mask = np.zeros_like(old_gray)
 mask[y:y+h, x:x+w] = 255
 
@@ -20,6 +26,7 @@ lk_params = dict(winSize=(15,15),
 
 while True:
     ret, frame = cap.read()
+    frame = resize_frame(frame)
     if not ret:
         break
 
@@ -32,7 +39,7 @@ while True:
 
     for new in good_new:
         x2,y2 = new.ravel()
-        cv2.circle(frame, (int(x2),int(y2)), 3, (0,255,0), -1)
+        cv2.circle(frame, (int(x2),int(y2)), 3, (255,0,0), -1)
 
     # Update for next frame
     old_gray = frame_gray.copy()
