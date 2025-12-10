@@ -3,24 +3,36 @@ from panorama_utils import *
 resize_factor = 0.2
 
 def get_homography_image(prev_img, img2, final_width):
-    # image1 = load_image(img1, True, resize_factor)
+
+    # Read the 2nd image
     image2 = load_image(img2, True, resize_factor)
 
+    # Get features of both image with ORB
     kp1, dst1 = get_features(prev_img)
     kp2, dst2 = get_features(image2)
 
+    # Find good matches with BFmatcher
     good_matches = get_good_matches(dst1, dst2)
 
+    # Get keypoints with good matches
     src_kp, dst_kp = get_final_points(kp1, kp2, good_matches)
 
+    # Find homography
     H, mask = find_homography(src_kp, dst_kp)
 
+    # Transform image with warp perspective
     transformed_image = get_transformed_image(image2, H, final_width)
 
     return transformed_image
 
 def get_panorama_image(w, h, homography_images):
-
+    """
+    Stitches the transformed images with one another
+    
+    :param w: width of the original image
+    :param h: height of the original image
+    :param homography_images: list of hmography images returned from above function by combination of 2 images
+    """
     l = len(homography_images)
 
     prev_stitched_image = homography_images[0]

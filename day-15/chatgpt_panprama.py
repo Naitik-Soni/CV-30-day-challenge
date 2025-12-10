@@ -8,19 +8,14 @@ def natural_key(text):
     """Key for natural/human sorting (numbers as integers)."""
     return [int(t) if t.isdigit() else t.lower() for t in re.split(r'(\d+)', text)]
 
-def natural_key(text):
-    return [int(t) if t.isdigit() else t.lower()
-            for t in re.split(r'(\d+)', text)]
-
 def get_sorted_file_paths(folder_path, ext=".png"):
     files = [
         os.path.join(folder_path, f)
         for f in os.listdir(folder_path)
         if f.lower().endswith(ext)
     ]
-    print("Files", files)
+
     files_sorted = sorted(files, key=lambda x: natural_key(os.path.basename(x)))
-    print("Files2", files_sorted)
     return files_sorted
 
 # ---------- feature matching & homography ----------
@@ -169,6 +164,7 @@ def stitch_images_in_folder(folder_path, ext=(".jpg", ".jpeg", ".png"), resize_f
 
         # warp and blend img into panorama
         panorama = warp_and_blend(panorama, img, H)
+        cv2.imwrite(fr"Outputs/Panorama {idx}.jpg", panorama)
         print(f"[INFO] Stitched {os.path.basename(p)} -> current panorama {panorama.shape[1]}x{panorama.shape[0]}")
 
     # Save result
