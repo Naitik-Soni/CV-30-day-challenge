@@ -3,10 +3,10 @@ import numpy as np
 
 def load_resize_images():
     face = cv2.imread(r"../Images/Face.jpg")
-    city = cv2.imread(r"../Images/city.jpg")
+    city = cv2.imread(r"../Images/forest.jpgr")
 
-    face = cv2.resize(face, (600, 600), cv2.INTER_AREA)
-    city = cv2.resize(city, (600, 600), cv2.INTER_AREA)
+    face = cv2.resize(face, (400, 400), cv2.INTER_AREA)
+    city = cv2.resize(city, (400, 400), cv2.INTER_AREA)
     return face, city
 
 def get_face_mask(face_img):
@@ -51,7 +51,7 @@ def main():
 
     mask, mask_f = get_face_mask(face)
 
-    result = alpha_blend_face_only(face, city, mask_f, alpha=0.7)
+    result = alpha_blend_face_only(face, city, mask_f, alpha=0.75)
 
     final_result = perform_or_operation(result, mask)
 
