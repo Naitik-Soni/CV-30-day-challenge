@@ -1,17 +1,17 @@
 # CV-30-day-challenge
 Repository for storing the code and data related to Computer vision 30 days challenge 
 
-| Day   | Topic            | Scope                                                     |
-|-------|------------------|-----------------------------------------------------------|
-| Day-1 | CV Basics        | load, save, display, resize, rotate, flip, HSV           |
-| Day-2 | Thresholding     | simple, Otsu, adaptive                                    |
-| Day-3 | Filtering        | box, gaussian, median, bilateral                          |
-| Day-4 | Morphology ✔     | erosion, dilation, opening, closing                       |
-| Day-5 | Edge Detection   | Sobel, Laplacian, Canny                                   |
-| Day-6 | Hough Transform  | lines, circles                                            |
-| Day-7 | Histograms       | histogram, HE, CLAHE                                      |
+| Day    | Topic            | Scope                                                     |
+|--------|------------------|-----------------------------------------------------------|
+| Day-1  | CV Basics        | load, save, display, resize, rotate, flip, HSV           |
+| Day-2  | Thresholding     | simple, Otsu, adaptive                                    |
+| Day-3  | Filtering        | box, gaussian, median, bilateral                          |
+| Day-4  | Morphology       | erosion, dilation, opening, closing                       |
+| Day-5  | Edge Detection   | Sobel, Laplacian, Canny                                   |
+| Day-6  | Hough Transform  | lines, circles                                            |
+| Day-7  | Histograms       | histogram, HE, CLAHE                                      |
 | Day-8  | Contours              | hierarchy, approxPoly, bounding boxes       |
-| Day-9  | Corner Detection ✔    | Harris, Shi-Tomasi, FAST                    |
+| Day-9  | Corner Detection      | Harris, Shi-Tomasi, FAST                    |
 | Day-10 | Feature Descriptors   | BRIEF, ORB descriptor                       |
 | Day-11 | Feature Matching      | BFMatcher, FLANN, Lowe ratio test           |
 | Day-12 | Optical Flow          | Lucas–Kanade sparse + dense                 |
