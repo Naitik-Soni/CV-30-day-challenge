@@ -1,10 +1,10 @@
 import cv2
 import numpy as np
 
-image_path = r".\input1.jpg"
+image_path = r"./input5.jpg"
 img = cv2.imread(image_path)
 
-f = 0.8
+f = 0.3
 img = cv2.resize(img, None, None, fx=f, fy=f, interpolation=cv2.INTER_LINEAR)
 image = img.copy()
 
@@ -63,7 +63,7 @@ M = cv2.getPerspectiveTransform(source_points, target_points)
 warped = cv2.warpPerspective(img, M, (w, h))
 
 cv2.imshow("Warped", warped)
-# cv2.imwrite(r"./Outputs/warped_manually.jpg", warped)
+cv2.imwrite(r"./Outputs/warped_manually.jpg", warped)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
