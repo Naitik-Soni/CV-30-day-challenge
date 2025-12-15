@@ -63,7 +63,7 @@ M = cv2.getPerspectiveTransform(source_points, target_points)
 warped = cv2.warpPerspective(img, M, (w, h))
 
 cv2.imshow("Warped", warped)
-cv2.imwrite(r"./Outputs/warped_manually.jpg", warped)
+# cv2.imwrite(r"./Outputs/warped_manually.jpg", warped)
 
 cv2.waitKey(0)
 cv2.destroyAllWindows()
