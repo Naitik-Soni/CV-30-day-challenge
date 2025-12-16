@@ -1,6 +1,7 @@
 import cv2
 
-cap = cv2.VideoCapture(r"./moving_cars.mp4")
+# cap = cv2.VideoCapture(r"./moving_cars.mp4")
+cap = cv2.VideoCapture(r"./highway.mp4")
 # cap = cv2.VideoCapture(r"./thief_robbery.mp4")
 
 sift = cv2.SIFT_create()
@@ -19,7 +20,7 @@ def getBoundingRect(img_area, contours):
         approx = cv2.approxPolyDP(cnt, 0.2 * peri, True)
 
         x, y, w, h = cv2.boundingRect(approx)
-        if cv2.contourArea(cnt) >= img_area/125:
+        if cv2.contourArea(cnt) >= img_area/150:
             bounding_rects.append((x,y,w,h))
 
     return bounding_rects
@@ -50,9 +51,9 @@ while True:
 
     diff = cv2.absdiff(curr_gray, prev_gray)
 
-    _, motion = cv2.threshold(diff, 15, 255, cv2.THRESH_BINARY)
+    _, motion = cv2.threshold(diff, 5, 255, cv2.THRESH_BINARY)
 
-    motion = cv2.medianBlur(motion, 7)
+    motion = cv2.medianBlur(motion, 5)
 
     contours = getContours(motion)
 
@@ -61,6 +62,7 @@ while True:
 
     cv2.imshow("Original", currs)
     cv2.imshow("Motion", motion)
+    cv2.imshow("Gray", curr_gray)
     cv2.imshow("Bounding rects", rect_image)
 
     prev_gray = curr_gray
