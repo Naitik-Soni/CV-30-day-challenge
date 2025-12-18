@@ -3,7 +3,7 @@ import numpy as np
 
 img = cv2.imread(r"../Images/night_sky.jpg")
 
-img = cv2.resize(img, None, None, fx = 0.6, fy=0.7, interpolation=cv2.INTER_AREA)
+img = cv2.resize(img, None, None, fx = 1, fy=1, interpolation=cv2.INTER_AREA)
 
 gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
 
