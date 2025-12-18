@@ -3,15 +3,15 @@ import numpy as np
 
 image = cv2.imread(r"../Images/colorized.jpeg")
 
-rf = 0.23
+rf = 0.3
 image = cv2.resize(image, None, None, fx=rf, fy=rf, interpolation=cv2.INTER_AREA)
 
 hsv = cv2.cvtColor(image, cv2.COLOR_BGR2HSV)
 
 h,s,v = cv2.split(hsv)
 
-lower = np.array([85, 0, 0])
-upper = np.array([135, 255, 255])
+lower = np.array([35, 0, 0])
+upper = np.array([85, 255, 255])
 
 lower1 = np.array([160, 0, 0])
 upper1 = np.array([180, 255, 255])
