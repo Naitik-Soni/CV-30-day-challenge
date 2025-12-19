@@ -5,6 +5,7 @@ __pycache__/
 
 # local files
 To be considered.txt
+data/
 
 # C extensions
 *.so
